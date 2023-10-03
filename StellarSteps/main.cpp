@@ -3,7 +3,7 @@
 
 int main()
 {
-    sf::RenderWindow Window(sf::VideoMode(800, 600), "Empty SFML Project");
+    sf::RenderWindow Window(sf::VideoMode(800, 600), "StellarSteps");
     Window.setFramerateLimit(60);
 
     sf::Clock GClock;
@@ -11,12 +11,12 @@ int main()
 
     Level NewLevel;
     NewLevel.loadLevel("Levels/Level1.txt");
-    
-    auto* Player1 = new Player();
-    Player1->setWindowRef(&Window);
+
+    Player Player1;
+    Player1.setWindowRef(&Window);
 
     Physics GPhysics;
-    GPhysics.addObject(reinterpret_cast<Character*>(Player1));
+    GPhysics.addObject(reinterpret_cast<Character*>(&Player1));
     GPhysics.addObject(NewLevel.WinTileRef);
 
     while (Window.isOpen())
@@ -34,13 +34,13 @@ int main()
         Window.clear();
 
         // Input and physics
-        Player1->input(GDeltaTime);
-        Player1->update(GDeltaTime, NewLevel.MLevelTiles);
-        
+        Player1.input(GDeltaTime);
+        Player1.update(GDeltaTime, NewLevel.MLevelTiles);
+
         GPhysics.updateForces(GDeltaTime, true);
 
         // Drawing
-        Window.draw(Player1->draw());
+        Window.draw(Player1.draw());
         NewLevel.draw(&Window);
 
         Window.display();

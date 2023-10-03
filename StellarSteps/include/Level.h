@@ -17,10 +17,10 @@ public:
 
 	int CurrentLevel = 1;
 
-	static const int LevelWidth = 15;
-	static const int LevelHeight = 20;
+	static constexpr int LevelWidth = 15;
+	static constexpr int LevelHeight = 20;
 
-	Character* WinTileRef;
+	Character* WinTileRef{};
 	
 	// Visual 
 	std::vector<Character*> MLevelBackgroundTiles; // Only for drawing
@@ -29,7 +29,7 @@ public:
 	std::vector<Character*> MLevelTiles; // Collisions of the level, also used for drawing
 	
 	// Loading files
-	char LevelArray[LevelWidth][LevelHeight];
+	char LevelArray[LevelWidth][LevelHeight]{};
 
 };
 

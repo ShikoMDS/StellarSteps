@@ -3,7 +3,7 @@
 Player::Player()
 {
 	setSprite("Images/Sprites/PlayerBlock.bmp");
-	MCharacterSprite.setOrigin(MCharacterTexture.getSize().x / 2, MCharacterTexture.getSize().y / 2);
+	MCharacterSprite.setOrigin(static_cast<float>(MCharacterTexture.getSize().x) / static_cast <float>(2), static_cast<float>(MCharacterTexture.getSize().y) / static_cast < float>(2));
 	MCharacterPosition = sf::Vector2f(400, 250);
 	MCharacterSprite.setPosition(MCharacterPosition);
 
@@ -21,7 +21,7 @@ void Player::input(float Dt)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		MCharacterVelocity.y = -5;
+		MCharacterVelocity.y = -10;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))

@@ -14,16 +14,16 @@ void Physics::updateForces(float Dt, bool Enabled)
 {
 	if (Enabled)
 	{
-		for (int I = 0; I < MCollisionObjects.size(); I++)
+		for (auto& MCollisionObject : MCollisionObjects)
 		{
-			if (MCollisionObjects[I]->MCharacterIsDynamic)
+			if (MCollisionObject->MCharacterIsDynamic)
 			{
-				if (MCollisionObjects[I]->MCharacterYVelocity < 5.0f)
+				if (MCollisionObject->MCharacterYVelocity < 5.0f)
 				{
-					MCollisionObjects[I]->applyGravity(MGravityValue, Dt);
+					MCollisionObject->applyGravity(MGravityValue, Dt);
 				}
 
-				MCollisionObjects[I]->MCharacterSprite.move(0, MCollisionObjects[I]->MCharacterYVelocity);
+				MCollisionObject->MCharacterSprite.move(0, MCollisionObject->MCharacterYVelocity);
 			}
 		}
 	}
@@ -31,7 +31,7 @@ void Physics::updateForces(float Dt, bool Enabled)
 
 void Physics::processCollisions(float Dt, std::vector<Character*> Collisions)
 {
-	for (int I = 0; I < Collisions.size(); I++)
+	for (int I = 0; I < static_cast<int>(Collisions.size()); I++)
 	{
 		Collisions[I]->update(Dt, Collisions);
 	}

@@ -77,7 +77,7 @@ public:
 	bool MCharacterIsDynamic = true;
 
 	// Window Reference
-	sf::RenderWindow* MWindowRef;
+	sf::RenderWindow* MWindowRef{};
 
 	// Variables ---------------------------------- //
 

@@ -8,10 +8,7 @@ Character::Character()
 	MCharacterSprite.setPosition(MCharacterPosition);
 }
 
-Character::~Character()
-{
-
-}
+Character::~Character() = default;
 
 void Character::setCharType(CharacterType Type)
 {
@@ -37,7 +34,6 @@ void Character::setCharType(CharacterType Type)
 	}
 
 	MCharType = Type;
-
 }
 
 void Character::setSprite(sf::String Path)
@@ -55,44 +51,31 @@ void Character::update(float Dt, std::vector<Character*> CollisionObjects)
 {
 	MCharacterSprite.move(0, MCharacterVelocity.y * MCharacterSpeedScalar * Dt);
 
-	for (int I = 0; I < CollisionObjects.size(); I++)
+	for (auto& CollisionObject : CollisionObjects)
 	{
-		if (MCharacterSprite.getGlobalBounds().intersects(CollisionObjects[I]->MCharacterSprite.getGlobalBounds()) &&
-			MCharacterName != CollisionObjects[I]->MCharacterName)
+		if (MCharacterSprite.getGlobalBounds().intersects(CollisionObject->MCharacterSprite.getGlobalBounds()) &&
+			MCharacterName != CollisionObject->MCharacterName)
 		{
-			collisionParse(CollisionObjects[I]->MCharType);
+			collisionParse(CollisionObject->MCharType);
 			MCharacterColliding = true;
 			MCharacterYVelocity = 0;
-			processYCollisions(this, CollisionObjects[I]);
+			processYCollisions(this, CollisionObject);
 		}
 	}
 
 	MCharacterSprite.move(MCharacterVelocity.x * MCharacterSpeedScalar * Dt, 0);
 
-	for (int I = 0; I < CollisionObjects.size(); I++)
+	for (auto& CollisionObject : CollisionObjects)
 	{
-		if (MCharacterSprite.getGlobalBounds().intersects(CollisionObjects[I]->MCharacterSprite.getGlobalBounds()) &&
-			MCharacterName != CollisionObjects[I]->MCharacterName)
+		if (MCharacterSprite.getGlobalBounds().intersects(CollisionObject->MCharacterSprite.getGlobalBounds()) &&
+			MCharacterName != CollisionObject->MCharacterName)
 		{
-			collisionParse(CollisionObjects[I]->MCharType);
+			collisionParse(CollisionObject->MCharType);
 			MCharacterColliding = true;
-			processXCollisions(this, CollisionObjects[I]);
+			processXCollisions(this, CollisionObject);
 		}
 	}
-
-	MCharacterSprite.move(0, MCharacterVelocity.y * MCharacterSpeedScalar * Dt);
-
-	for (int I = 0; I < CollisionObjects.size(); I++)
-	{
-		if (MCharacterSprite.getGlobalBounds().intersects(CollisionObjects[I]->MCharacterSprite.getGlobalBounds()) &&
-			MCharType != CollisionObjects[I]->MCharType)
-		{
-			collisionParse(CollisionObjects[I]->MCharType);
-			MCharacterColliding = true;
-			MCharacterYVelocity = 0;
-			processYCollisions(this, CollisionObjects[I]);
-		}
-	}
+	
 }
 
 void Character::processXCollisions(Character* ObjA, Character* ObjB)

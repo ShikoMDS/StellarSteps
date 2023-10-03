@@ -1,9 +1,6 @@
 #include "Level.h"
 
-Level::Level()
-{
-
-}
+Level::Level() = default;
 
 Level::~Level()
 {
@@ -26,7 +23,7 @@ void Level::loadLevel(std::string FilePath)
 	{
 		while (std::getline(LoadFileStream, LoadFileString))
 		{
-			for (int I = 0; I < LoadFileString.size(); I++)
+			for (int I = 0; I < static_cast<int>(LoadFileString.size()); I++)
 			{
 				LevelArray[LineCount][I] = LoadFileString[I];
 			}
@@ -51,7 +48,7 @@ void Level::createLevel()
 				//Character* NewTile = new Character();
 				auto* NewTile = new Character();
 				NewTile->setCharType(CharTypeWall);
-				NewTile->setPosition(sf::Vector2f(X * 32, Y * 32)); // Could be a variable for sprite
+				NewTile->setPosition(sf::Vector2f(static_cast<float>(X * 32), static_cast<float>(Y * 32))); // Could be a variable for sprite
 				MLevelTiles.push_back(NewTile);
 			}
 
@@ -60,7 +57,7 @@ void Level::createLevel()
 				//Character* NewTile = new Character();
 				auto* NewTile = new Character();
 				NewTile->setCharType(CharTypeTrap);
-				NewTile->setPosition(sf::Vector2f(X * 32, Y * 32)); // Could be a variable for sprite
+				NewTile->setPosition(sf::Vector2f(static_cast<float>(X * 32), static_cast<float>(Y * 32))); // Could be a variable for sprite
 				MLevelTiles.push_back(NewTile);
 			}
 
@@ -69,7 +66,7 @@ void Level::createLevel()
 				//Character* NewTile = new Character();
 				auto* NewTile = new Character();
 				NewTile->setCharType(CharTypeWin);
-				NewTile->setPosition(sf::Vector2f(X * 32, Y * 32)); // Could be a variable for sprite
+				NewTile->setPosition(sf::Vector2f(static_cast<float>(X * 32), static_cast<float>(Y * 32))); // Could be a variable for sprite
 				WinTileRef = NewTile;
 			}
 		}
