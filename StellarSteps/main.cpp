@@ -35,6 +35,7 @@ int main()
 
         // Input and physics
         Player1.input(GDeltaTime);
+        Player1.update(GDeltaTime, GPhysics.MCollisionObjects);
         Player1.update(GDeltaTime, NewLevel.MLevelTiles);
 
         GPhysics.updateForces(GDeltaTime, true);

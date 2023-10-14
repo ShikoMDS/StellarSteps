@@ -23,7 +23,7 @@ void Physics::updateForces(float Dt, bool Enabled)
 					MCollisionObject->applyGravity(MGravityValue, Dt);
 				}
 
-				MCollisionObject->MCharacterSprite.move(0, MCollisionObject->MCharacterYVelocity);
+				//MCollisionObject->MCharacterSprite.move(0, MCollisionObject->MCharacterYVelocity);
 			}
 		}
 	}
